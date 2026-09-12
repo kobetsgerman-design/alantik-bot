@@ -14,7 +14,6 @@ import asyncio
 import telegram
 from telegram.ext import Application, CommandHandler, ContextTypes
 from google.oauth2.service_account import Credentials
-from google.sheets.v4 import service as sheets_service
 import gspread
 
 # Setup logging
@@ -52,7 +51,7 @@ class AlantikBot:
                 creds_dict,
                 scopes=['https://www.googleapis.com/auth/spreadsheets']
             )
-            self.gc = gspread.Authorize(credentials)
+            self.gc = gspread.authorize(credentials)
             self.sheet = self.gc.open_by_key(SHEET_ID)
             self.worksheet = self.sheet.worksheet(SHEET_NAME)
             logger.info("✅ Google Sheets connected successfully")
